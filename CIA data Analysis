@@ -1,0 +1,65 @@
+-- SIMPLE GUIDED SQL project to Analyze the CIA Factbook Data Using SQL
+
+--INSTRUCTION 1 - Write a query to return information on the tables in the database.
+SELECT *
+FROM facts;
+
+--INSTRUCTION 2 - In a different code cell, write and run another query that returns the first five rows of the facts table in the database.
+SELECT * 
+FROM facts f 
+LIMIT 10;
+
+--INSTRUCTION 3 - Write a single query that returns the following
+--1. Minimum population
+--2. Maximum population
+--3. Minimum populatin growth
+--4. Maximum population growth
+
+SELECT MIN(population),
+	   MAX(population),
+	   MIN(population_growth),
+	   MAX(population_growth) 
+FROM facts f;
+
+--INSTRUCTION 4 - Write a query that returns the countries with the minimum population.
+SELECT name
+FROM facts f 
+WHERE population IS 0;
+
+--INSTRUCTION 5 - Write a query that returns the countries with the maximum population.
+SELECT name
+FROM facts f 
+WHERE population IS 7256490011;
+
+--INSTRUCTION 6 - Recompute the summary statistics you found earlier while excluding the row for the whole world. Include the following:
+SELECT MIN(population),
+	   MAX(population),
+	   MIN(population_growth),
+	   MAX(population_growth) 
+FROM facts f
+WHERE population > 0;
+
+--INSTRUCTION 7 - In a different code cell, calculate the average value for the following columns:
+-- popluation
+--area
+
+SELECT AVG(population),
+	   AVG(area)
+FROM facts f;
+
+--INSTRUCTION 8 -  identify countries that have the following:
+
+--Above-average values for population.
+--Below-average values for area.
+
+SELECT * 
+FROM facts f 
+WHERE population > (SELECT AVG(population)
+						FROM facts)
+AND area < (SELECT AVG(area)
+				FROM facts)
+
+
+
+
+
